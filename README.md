@@ -1,6 +1,6 @@
 # Hi, I'm Asad Aslam 👋
 
-**Data & AI Engineer** based in Nürnberg, Germany. Over the past 3+ years at Siemens I have built production ETL/ELT pipelines in Python, managed Snowflake data warehouse operations, and deployed Gen AI solutions on Azure. My work sits at the intersection of data engineering, analytics, and applied AI — turning messy supply-chain data into tools that people actually use every day.
+**Data & AI Engineer** based in Nürnberg, Germany. Over the past 3+ years at Siemens I have built production ETL/ELT pipelines in Python, managed Snowflake data warehouse operations, and deployed Gen AI solutions on Azure. My work sits at the intersection of data engineering, analytics, and applied AI – turning messy supply-chain data into tools that people actually use every day.
 
 I completed my MSc in Data Science at Friedrich-Alexander University Erlangen-Nürnberg in 2025 and am currently looking for full-time Data Engineer, AI Engineer, or Analytics Engineer roles across Germany.
 
@@ -42,7 +42,7 @@ I completed my MSc in Data Science at Friedrich-Alexander University Erlangen-N�
 
 ## 💼 Work Experience
 
-### Data Engineer (Working Student) — Siemens AG, Munich
+### Data Engineer (Working Student) – Siemens AG, Munich
 **Jul 2024 – Present**
 
 Part of the TIERN (Tier-N supply chain visibility) team at Siemens AG, building internal data engineering and Gen AI tools for supplier mapping and supply chain analytics.
@@ -56,7 +56,7 @@ Part of the TIERN (Tier-N supply chain visibility) team at Siemens AG, building 
 
 ---
 
-### Data Analyst (Working Student) — Siemens Mobility, Erlangen
+### Data Analyst (Working Student) – Siemens Mobility, Erlangen
 **Jun 2022 – Jun 2024**
 
 Supporting the BI and analytics function at Siemens Mobility, delivering reporting tools and data workflows for operational teams.
@@ -69,7 +69,7 @@ Supporting the BI and analytics function at Siemens Mobility, delivering reporti
 
 ---
 
-### Web Developer (Full-time) — AIMS IT Solutions and Trainings, Lahore
+### Web Developer (Full-time) – AIMS IT Solutions and Trainings, Lahore
 **Jul 2019 – Jan 2021**
 
 - Implemented a responsive, mobile-first approach that increased mobile user engagement
@@ -80,7 +80,7 @@ Supporting the BI and analytics function at Siemens Mobility, delivering reporti
 
 ## 📂 Featured Projects
 
-### [TinaGPT — Gen AI Supply Chain Chatbot](https://github.com/asadaslam556/tinagpt)
+### [TinaGPT – Gen AI Supply Chain Chatbot](https://github.com/asadaslam556/tinagpt)
 **Mar 2026 – Present | Associated with Siemens AG**
 
 A domain-specific question-answering system for Siemens supply-chain analysts. Users ask questions in plain English and get answers drawn directly from a Neo4j graph database covering suppliers, parts, tier-n relationships, and product change notifications.
@@ -94,7 +94,7 @@ A domain-specific question-answering system for Siemens supply-chain analysts. U
 
 ---
 
-### [TIERN MappingHub — Supplier and Location Data Platform](https://github.com/asadaslam556/tiern-mappinghub)
+### [TIERN MappingHub – Supplier and Location Data Platform](https://github.com/asadaslam556/tiern-mappinghub)
 **Jan 2025 – Mar 2026 | Associated with Siemens AG**
 
 A two-workspace Streamlit application deployed on Azure via GitLab CI/CD for the TIERN supply chain visibility program at Siemens.
@@ -114,7 +114,7 @@ A two-workspace Streamlit application deployed on Azure via GitLab CI/CD for the
 
 ---
 
-### TCP Risk Management — Supplier Risk Assessment Tool
+### TCP Risk Management – Supplier Risk Assessment Tool
 **Jun 2022 – Jun 2024 | Associated with Siemens Mobility**
 
 A Mendix application deployed to Mendix Cloud for the procurement team at Siemens Mobility Erlangen, replacing a fully manual Excel-based process.
@@ -158,7 +158,7 @@ Thesis: *Investigating the Role of MicroRNAs and IsomiRs as Biomarkers in Psychi
 
 Coursework: algorithms, data structures, artificial intelligence, database management systems, software engineering, statistics and probability.
 
-Thesis: *Paintex — Android application using Google ARCore augmented reality and machine learning to visualize paint colors on walls in real time before ordering*
+Thesis: *Paintex – Android application using Google ARCore augmented reality and machine learning to visualize paint colors on walls in real time before ordering*
 
 ---
 
