@@ -6,7 +6,6 @@ I completed my MSc in Data Science at Friedrich-Alexander University Erlangen-NÃ
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Asad%20Aslam-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/asadaslam556/)
 [![Email](https://img.shields.io/badge/Email-asadaslam556%40gmail.com-D14836?style=flat&logo=gmail)](mailto:asadaslam556@gmail.com)
-[![Location](https://img.shields.io/badge/Location-NÃ¼rnberg%2C%20Germany-lightgrey?style=flat)](https://www.linkedin.com/in/asadaslam556/)
 
 ---
 
@@ -87,7 +86,6 @@ A domain-specific question-answering system for Siemens supply-chain analysts. U
 
 - Two-tier query engine: rule-based intent router with pre-built Cypher templates + Azure OpenAI/LangChain fallback for everything else
 - Safety layer blocks all write operations (DELETE, CREATE, MERGE) before any query executes
-- Tested against **109 representative questions** before production deployment (75 auto-scored, 100% pass rate)
 - Deployed as an **Azure ML Managed Online Endpoint** inside a Docker container
 
 `Python` `Neo4j` `Azure OpenAI` `LangChain` `Docker` `Azure ML` `Cypher` `Prompt Engineering`
