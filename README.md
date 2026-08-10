@@ -1,166 +1,124 @@
-# Hi, I'm Asad Aslam 👋
+# Asad Aslam
 
-**Data & AI Engineer** based in Nürnberg, Germany. Over the past 3+ years at Siemens I have built production ETL/ELT pipelines in Python, managed Snowflake data warehouse operations, and deployed Gen AI solutions on Azure. My work sits at the intersection of data engineering, analytics, and applied AI – turning messy supply-chain data into tools that people actually use every day.
+**Data and AI Engineer** based in Nürnberg, Germany.
 
-I completed my MSc in Data Science at Friedrich-Alexander University Erlangen-Nürnberg in 2025 and am currently looking for full-time Data Engineer, AI Engineer, or Analytics Engineer roles across Germany.
+I have spent the last four years at Siemens working on the supply chain side of things: Python ETL pipelines, Snowflake, supplier name matching with sentence transformers, Power BI reporting, and a Neo4j backed chatbot that lets analysts ask questions in plain English instead of writing Cypher by hand. I finished my MSc in Data Science at FAU Erlangen-Nürnberg in May 2025.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Asad%20Aslam-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/asadaslam556/)
+What I publish here is what I build on my own time, mostly agentic LLM systems. I tend to spend my effort on the parts that get skipped: validating generated code before it runs, writing tests that pass without a live model, evaluating honestly instead of eyeballing a few outputs, and making the system admit when it does not know. Everything here is open source and runs locally by default.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-asadaslam556-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/asadaslam556/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-asadaslam.tech-4F46E5?style=flat&logo=vercel)](https://asadaslam.tech)
 [![Email](https://img.shields.io/badge/Email-asadaslam556%40gmail.com-D14836?style=flat&logo=gmail)](mailto:asadaslam556@gmail.com)
 
 ---
 
-## 🚀 What I Build
+## Featured projects
 
-- **Gen AI systems** that convert natural language into Neo4j Cypher queries using Azure OpenAI and LangChain, deployed as Azure ML Managed Online Endpoints
-- **ETL/ELT pipelines** in Python running on GitLab CI/CD with ML-based supplier name matching using Sentence Transformers (SBERT)
-- **Streamlit applications** deployed on Azure for reviewing and managing 10,000+ supplier name and location records
-- **Snowflake data warehouse** operations and ELT workflow optimization at enterprise scale for supply-chain analytics
-- **Power BI dashboards** with advanced DAX models eliminating 10–15 hours of manual reporting work per week
-- **Low-code applications** in Mendix covering multi-dimensional supplier risk assessment across 210+ active suppliers
+### [prism-data-agent](https://github.com/asadaslam556/prism-data-agent)
 
----
+An AI data analyst you can ask questions in plain English. It plans an approach, writes the SQL, runs pandas over the results, charts what comes back, then checks its own answer before handing it to you.
 
-## 🔧 Tech Stack
+- LangGraph handles the multi-agent orchestration, FastAPI serves the backend, React renders the console, and the live reasoning trace streams over SSE so you can watch it think
+- Generated SQL is parsed and restricted to a single SELECT or WITH statement before it touches a database
+- Generated Python is AST inspected and executed in a sandboxed namespace against a restricted builtins allow-list
+- 168 tests with the LLM fully mocked, so CI runs without a model
+- Local-first through Ollama, with OpenAI and Anthropic available as drop-in providers
+- Docker Compose and GitHub Actions included
 
-**Languages & Databases**
-`Python` `SQL` `Snowflake` `dbt` `Neo4j` `R` `JSON`
+`Python` `LangGraph` `FastAPI` `React` `Ollama` `pandas` `SSE` `Docker` `pytest`
 
-**Cloud & DevOps**
-`Microsoft Azure` `AWS` `Azure ML` `GitLab CI/CD` `Docker` `Kubernetes`
+### [portfolio](https://github.com/asadaslam556/portfolio) · [asadaslam.tech](https://asadaslam.tech)
 
-**AI & ML**
-`LangChain` `Azure OpenAI` `Sentence Transformers (SBERT)` `NLP` `LLMs` `Prompt Engineering` `PyTorch` `Pandas` `NumPy`
+My personal site, built as a 3D scene rather than a static page because I wanted to learn React Three Fiber properly. Deployed on Vercel.
 
-**Analytics & BI**
-`Power BI` `DAX` `Power Query` `Streamlit` `NeoDash` `Graph Analytics` `Statistical Analysis`
-
-**Other**
-`REST APIs` `Mendix` `Plotly` `Nominatim API` `Prewave API`
+`React 18` `Vite` `React Three Fiber` `Tailwind CSS` `Framer Motion` `Vercel`
 
 ---
 
-## 💼 Work Experience
+## Work at Siemens
 
-### Data Engineer (Working Student) – Siemens AG, Munich
+The code below is internal and not public, so there are no repository links. Happy to walk through the architecture and the tradeoffs in a conversation.
+
+### Data Engineer (Working Student) · Siemens AG, Munich
 **Jul 2024 – Present**
 
-Part of the TIERN (Tier-N supply chain visibility) team at Siemens AG, building internal data engineering and Gen AI tools for supplier mapping and supply chain analytics.
+Building internal data engineering and Gen AI tooling for a tier-n supply chain visibility program.
 
-- Build Python ETL pipelines with GitLab CI/CD, using a Sentence Transformers (SBERT) model to automatically match supplier names from multiple source systems, reducing manual mapping by **50%**
-- Develop and deploy a Streamlit application on Azure for reviewing and managing over 10,000 supplier name and location mappings, reducing manual correction effort by roughly **30–40%**
-- Manage Snowflake data warehouse operations, optimizing ELT workflows using SQL to improve pipeline efficiency for enterprise-scale supply-chain analytics
-- Integrate REST APIs to automatically enrich supply-chain supplier and location data, reducing manual lookup effort across 10,000+ records
-- Develop and optimize Neo4j Cypher queries for supply-chain data retrieval, forming the graph database layer behind a Gen AI chatbot
-- Build and deploy a Gen AI chatbot in Python that converts supply-chain questions in natural language into Neo4j Cypher queries, using Azure OpenAI and LangChain, deployed as an Azure ML API endpoint
+**Gen AI supply chain chatbot.** A question answering system for supply chain analysts, backed by a Neo4j graph of suppliers, parts, tier-n relationships, and product change notifications. Two-tier query engine: a rule-based intent router with pre-built Cypher templates handles the common questions deterministically, and an Azure OpenAI and LangChain path covers everything else. A read-only safety layer blocks writes before any query reaches the database. Deployed as an Azure ML Managed Online Endpoint inside a Docker container. Correctness is tracked with a regression suite of 150 representative business questions run against the live endpoint, most recently 147 pass, 3 flagged for review, zero failures.
 
----
+**Supplier and location mapping platform.** A two-workspace Streamlit application on Azure, shipped through GitLab CI/CD. The supplier workspace runs an SBERT model behind a text normalizer that strips legal suffixes across 20+ jurisdictions before matching, auto-locks anything above a 95% confidence threshold, and queues the rest for human review. The location workspace uses the Nominatim OpenStreetMap API with rate limiting and retry logic. Snowflake backend, Plotly dashboards, live Prewave API integration. It manages more than 10,000 supplier name and location records and cut manual mapping by 50% and correction effort by 30–40%.
 
-### Data Analyst (Working Student) – Siemens Mobility, Erlangen
+Alongside those, I run Snowflake warehouse operations and optimize ELT workflows in SQL, write and tune the Cypher behind the graph layer, and integrate REST APIs to enrich supplier and location data automatically.
+
+### Data Analyst (Working Student) · Siemens Mobility, Erlangen
 **Jun 2022 – Jun 2024**
 
-Supporting the BI and analytics function at Siemens Mobility, delivering reporting tools and data workflows for operational teams.
+Reporting and analytics for operational teams.
 
-- Designed interactive Power BI dashboards for real-time KPI tracking, used across 3 operational teams
-- Developed ETL workflows with Power Query to consolidate data from 6 diverse sources including Snowflake and Excel, ensuring consistent data quality
-- Developed advanced DAX analytical models, reducing manual reporting time by roughly **40–45%**
-- Automated KPI reporting processes, eliminating roughly **10–15 hours** of manual work per week
-- Built a supplier risk assessment application in Mendix covering 8 risk dimensions per supplier, with automated risk classification, a Risk Share dashboard, and an Excel importer for bulk data upload, deployed to Mendix Cloud
+**KPI reporting dashboard.** An interactive Power BI platform replacing a manual Excel process for three operational teams. Power Query ETL consolidating six sources including Snowflake and Excel, four dashboard pages covering executive overview, operations, quality, and logistics, and DAX measures for production achievement, on-time delivery, first pass yield, fail rate, budget variance, and average delay days. Cut reporting time by 40–45% and removed roughly 10–15 hours of manual work per week.
 
----
+**Supplier risk assessment tool.** A Mendix application on Mendix Cloud for the procurement team, replacing a spreadsheet process. Scores 8 risk dimensions per supplier covering financial stability, environmental and social risk, production risk, quality, geopolitical risk, delivery, solvency, and image and compliance. Automated risk classification, a risk share dashboard, a risk/cost matrix, an Excel bulk importer, a currency converter, and role-based user management. 210+ active supplier records in daily use. I wrote the user manual and handed it over to the procurement stakeholders.
 
-### Web Developer (Full-time) – AIMS IT Solutions and Trainings, Lahore
+### Web Developer · AIMS IT Solutions and Trainings, Lahore
 **Jul 2019 – Jan 2021**
 
-- Implemented a responsive, mobile-first approach that increased mobile user engagement
-- Led the end-to-end development of multiple websites, a mobile app, and several landing pages
-- Deployed web applications on AWS EC2, achieving high uptime and reducing maintenance costs
+Built and shipped several websites, a mobile app, and a set of landing pages. Moved the front end to a mobile-first responsive approach, which raised mobile engagement. Deployed on AWS EC2.
 
 ---
 
-## 📂 Featured Projects
+## Research and awards
 
-### [TinaGPT – Gen AI Supply Chain Chatbot](https://github.com/asadaslam556/tinagpt)
-**Mar 2026 – Present | Associated with Siemens AG**
+**Data attribution for satellite imagery classification** (University of Bonn)
 
-A domain-specific question-answering system for Siemens supply-chain analysts. Users ask questions in plain English and get answers drawn directly from a Neo4j graph database covering suppliers, parts, tier-n relationships, and product change notifications.
+Which training images actually shaped the model, and can you find the mislabeled ones without looking at every sample? I implemented three attribution methods from scratch on EuroSAT with a ResNet-18 backbone: EL2N, TracIn, and influence functions. Experiments ran on the Bender HPC cluster. All three separated corrupted from clean samples well, with AUROC between 0.967 and 0.997 depending on the method and the corruption rate.
 
-- Two-tier query engine: rule-based intent router with pre-built Cypher templates + Azure OpenAI/LangChain fallback for everything else
-- Safety layer blocks all write operations (DELETE, CREATE, MERGE) before any query executes
-- Deployed as an **Azure ML Managed Online Endpoint** inside a Docker container
+`PyTorch` `ResNet-18` `EuroSAT` `Influence Functions` `TracIn` `EL2N` `HPC`
 
-`Python` `Neo4j` `Azure OpenAI` `LangChain` `Docker` `Azure ML` `Cypher` `Prompt Engineering`
+**Second place, Neo4j Graphathon**
 
 ---
 
-### [TIERN MappingHub – Supplier and Location Data Platform](https://github.com/asadaslam556/tiern-mappinghub)
-**Jan 2025 – Mar 2026 | Associated with Siemens AG**
+## Tech stack
 
-A two-workspace Streamlit application deployed on Azure via GitLab CI/CD for the TIERN supply chain visibility program at Siemens.
+**Languages and data**
+`Python` `SQL` `R` `Snowflake` `dbt` `Neo4j` `Cypher` `pandas` `NumPy` `PyTorch` `JSON`
 
-**Supplier Mapping Workspace:**
-- SBERT model with custom text normalizer stripping legal suffixes across 20+ jurisdictions before matching
-- 95% confidence threshold for auto-locking; human review queue for lower-confidence matches
-- Reduced manual mapping by **50%**
+**AI and ML**
+`LangChain` `LangGraph` `Azure OpenAI` `Anthropic Claude API` `Ollama` `RAG` `Agentic RAG` `Hybrid retrieval (BM25 + vector)` `Reciprocal rank fusion` `Vector search` `Embeddings` `Sentence Transformers (SBERT)` `LoRA` `PEFT` `Transformers` `GGUF` `LLM-as-judge evaluation` `Prompt engineering` `NLP` `Graph RAG` `Text-to-Cypher`
 
-**Location Mapping Workspace:**
-- Nominatim OpenStreetMap API with rate limiting and retry logic
-- High-confidence matches auto-locked, rest queued for human review
+**Backend and frontend**
+`FastAPI` `React` `Vite` `Streamlit` `REST APIs` `SSE streaming` `PWA` `pytest`
 
-**Infrastructure:** Snowflake backend, Plotly dashboards, live Prewave API integration. Managing 10,000+ records, reducing correction effort by **30–40%**
+**Cloud and DevOps**
+`Azure` `Azure ML` `AWS` `Docker` `Docker Compose` `Kubernetes` `GitLab CI/CD` `GitHub Actions`
 
-`Python` `Streamlit` `Snowflake` `SBERT` `GitLab CI/CD` `Azure` `Nominatim` `REST APIs` `Plotly`
+**Analytics and BI**
+`Power BI` `DAX` `Power Query` `Plotly` `NeoDash` `Graph analytics` `Statistical analysis`
 
----
-
-### TCP Risk Management – Supplier Risk Assessment Tool
-**Jun 2022 – Jun 2024 | Associated with Siemens Mobility**
-
-A Mendix application deployed to Mendix Cloud for the procurement team at Siemens Mobility Erlangen, replacing a fully manual Excel-based process.
-
-- Tracks **8 risk dimensions** per supplier: financial stability, environmental and social risk, production risk, quality, geopolitical risk, delivery, solvency, and image and compliance
-- Features: multi-dimensional risk scoring forms, automated risk classification, Risk Share dashboard, Risk/Cost Matrix, Excel importer, currency converter, role-based user management
-- **210+ active supplier records** in daily operational use
-- Wrote the complete user manual and handed over to procurement stakeholders
-
-`Mendix` `Mendix Cloud` `Low-Code Development` `Business Process Automation`
+**Other**
+`Mendix` `Nominatim API` `Prewave API` `Git`
 
 ---
 
-### KPI Reporting Dashboard
-**Jun 2022 – Jun 2024 | Associated with Siemens Mobility**
-
-An interactive Power BI reporting platform replacing manual Excel-based KPI tracking for three operational teams at Siemens Mobility Erlangen.
-
-- Consolidated data from 6 sources using Power Query ETL workflows (Snowflake, Excel, manual tracking sheets)
-- Built 4 dashboard pages: Executive KPI Overview, Operations, Quality, and Logistics
-- Advanced DAX measures covering production achievement, on-time delivery, first pass yield, fail rate, budget variance, and average delay days
-- Eliminated **10–15 hours** of manual reporting per week, reducing reporting time by **40–45%**
-
-`Power BI` `DAX` `Power Query` `Snowflake` `ETL/ELT` `Data Visualization`
-
----
-
-## 🎓 Education
+## Education
 
 ### MSc Data Science
-**Friedrich-Alexander University Erlangen-Nürnberg | Oct 2021 – May 2025 | Grade: 2.8**
+**Friedrich-Alexander University Erlangen-Nürnberg · Oct 2021 – May 2025**
 
-Focus on machine learning, deep learning, natural language processing, statistical modeling, and data engineering.
+Machine learning, deep learning, NLP, statistical modeling, and data engineering.
 
 Thesis: *Investigating the Role of MicroRNAs and IsomiRs as Biomarkers in Psychiatric Disorders Using Advanced Machine Learning Methods*
 
----
-
 ### BSc Computer Science
-**University of South Asia | Oct 2015 – Jun 2020 | CGPA: 3.41/4.0**
+**University of South Asia · Oct 2015 – Jun 2020**
 
-Coursework: algorithms, data structures, artificial intelligence, database management systems, software engineering, statistics and probability.
+Algorithms, data structures, artificial intelligence, database systems, software engineering, statistics and probability.
 
-Thesis: *Paintex – Android application using Google ARCore augmented reality and machine learning to visualize paint colors on walls in real time before ordering*
+Thesis: *Paintex*, an Android app using Google ARCore and machine learning to preview paint colors on real walls before ordering.
 
 ---
 
-## 📜 Certifications
+## Certifications
 
 | Certification | Issuer |
 |---|---|
@@ -176,17 +134,69 @@ Thesis: *Paintex – Android application using Google ARCore augmented reality a
 
 ---
 
-## 📊 GitHub Stats
+## Get in touch
 
-![Asad's GitHub Stats](https://github-readme-stats.vercel.app/api?username=asadaslam556&show_icons=true&theme=tokyonight&hide_border=true&count_private=true)
+I am looking for **Data Engineer**, **AI Engineer**, and **Analytics Engineer** roles across Germany, and I am open to relocating. Available from September 2026 with a one-month notice period, earlier by agreement.
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=asadaslam556&layout=compact&theme=tokyonight&hide_border=true)
-
----
-
-## 📫 Get in Touch
-
-Open to **Data Engineer**, **AI Engineer**, and **Analytics Engineer** roles across Germany. Available from June 2026 with a one-month notice period, earlier by agreement.
+If something here overlaps with what your team is building, I would be glad to talk about it.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/asadaslam556/)
-[![Email](https://img.shields.io/badge/Email-asadaslam556%40gmail.com-D14836?style=for-the-badge&logo=gmail)](mailto:asadaslam556@gmail.com)
+[![Email](https://img.shields.io/badge/Email-Say%20hello-D14836?style=for-the-badge&logo=gmail)](mailto:asadaslam556@gmail.com)
+
+<!--
+==========================================================================
+DROP-IN BLOCKS FOR REPOS NOT YET PUSHED.
+These are invisible on the rendered profile. When a repo goes public,
+cut the block out of this comment and paste it into "Featured projects".
+Check the repo name in the link matches what you actually pushed.
+==========================================================================
+
+### [agentic-rag-assistant](https://github.com/asadaslam556/agentic-rag-assistant)
+
+A chat assistant that decides which tool to reach for, then proves what it
+tells you. It plans across hybrid BM25 and vector search, web search, a
+structured catalog lookup, and a calculator, fuses the evidence with
+reciprocal rank fusion, streams a cited answer token by token over SSE, and
+verifies every individual claim against its sources before the turn counts as
+finished. When the evidence is not there, it says so instead of guessing.
+
+- Plan-and-act loop written by hand on a strict JSON protocol, no agent
+  framework, which is also what makes a fully deterministic offline mock
+  possible for tests and CI
+- 66 tests, 58 of which run offline with no model
+- Golden-set eval plus an LLM-as-judge mode scoring faithfulness and relevance
+- React and Vite console shipped as a PWA, Bearer token auth on the API
+- Runs against Ollama, OpenAI, Azure OpenAI, or Anthropic
+
+`Python` `RAG` `BM25` `Vector search` `RRF` `FastAPI` `React` `PWA` `SSE` `Docker`
+
+### [llm-finetune-lab](https://github.com/asadaslam556/llm-finetune-lab)
+
+A runnable LoRA fine-tuning pipeline, end to end. Ingest a support ticket
+dataset, dedupe and format it, pull a small base model (Qwen2.5-0.5B-Instruct),
+profile the available compute, fine-tune with LoRA through transformers and
+peft, evaluate on token-overlap F1 and keyword hit rate, then export to GGUF
+and deploy to Ollama.
+
+- Dry-run mode walks all seven stages with no GPU and no downloads, so you can
+  iterate on the pipeline itself in seconds
+- Real-run mode does the actual training and deployment
+- FastAPI backend with a React ops console, 88 tests
+
+`Python` `LoRA` `PEFT` `transformers` `Qwen2.5` `GGUF` `Ollama` `FastAPI` `React`
+
+### [job-apply-pipeline](https://github.com/asadaslam556/job-apply-pipeline)
+
+Job search automation for the German market. A two-step collect then verify
+flow that pulls from six ATS providers and the Bundesagentur API, scores each
+posting against a profile, reads Gmail for application status, and tracks
+everything as an event-sourced log rather than a mutable spreadsheet.
+
+- Corporate sibling guard that stops cross-entity false matches between
+  companies with similar names
+- Deduplication on a normalized company key
+- 116 tests
+
+`Python` `Gmail API` `ATS integrations` `Event sourcing` `pytest`
+
+-->
